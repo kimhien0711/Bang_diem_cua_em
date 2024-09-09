@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            width: 300px;
+            height: auto;
+            background-color: #ada9a4;
+            margin: 20px;
+        }
+        h2{
+            text-align: center;
+        }
+        .group{
+            display: flex;
+            padding: 10px;
+        }
+        .button{
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+        }
+        #result {
+            text-align: center;
+            font-size: 24;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>BANG DIEM CUA EM</h2>
+        <div class="group">
+            <p>Semester 1:</p>
+            <input id="Se1" class="input" type="number">
+        </div>
+        <div class="group">
+            <p>Semester 2:</p>
+            <input id="Se2" class="input" type="number">
+        </div>
+        <div class="group">
+            <p>Year:</p>
+            <select id="Year">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+        <div class="group">
+            <p>Summarise:</p>
+            <input id="Summarise" class="input" type="number" disabled> 
+        </div>
+        <div class="button">
+            <button id="OK" value="OK" onclick="myFunction1()">OK</button>
+            <button id="Cancel" value="Cancel" onclick="myFunction2()">Cancel</button>
+        </div>
+        <div id="result"></div>
+    </div>
+    <script>
+
+        function myFunction1(){
+            var Se1 = parseFloat(document.getElementById('Se1').value);
+            var Se2 = parseFloat(document.getElementById('Se2').value);
+            var Year = parseInt(document.getElementById('Year').value);
+            var Summarise;
+            var result;
+        
+            switch(Year){
+                case 1:
+                    Summarise = (Se1 + Se2) / 2;
+                    break;
+                case 2:
+                    Summarise = (Se1 + Se2 * 2) / 3;
+                    break;
+                case 3:
+                    Summarise = (Se1 * 2 + Se2 * 3) / 5;
+                    break;
+                default:
+                    alert("Invalid Year");
+                    return;
+            }
+
+            document.getElementById('Summarise').value = Summarise.toFixed(2); //lấy số thập phân 2 chữ số
+
+            if (Summarise >= 9){
+                result = "Học sinh xuất sắc";
+                document.getElementById('result').style.color = "red";
+            } else if (Summarise >= 8){
+                result = "Học sinh giỏi";
+                document.getElementById('result').style.color = "green";
+            } else if (Summarise >= 6.5){
+                result = "Học sinh khá";
+                document.getElementById('result').style.color = "yellow";
+            } else if (Summarise >= 5){
+                result = "Học sinh trung bình";
+                document.getElementById('result').style.color = "blue";
+            } else {
+                result = "Học sinh yếu kém";
+                document.getElementById('result').style.color = "orange";
+            }
+
+            document.getElementById('result').innerHTML = result;
+        }
+
+        function myFunction2(){
+            document.getElementById('Se1').value = "";
+            document.getElementById('Se2').value = "";
+            document.getElementById('Summarise').value = "";
+            document.getElementById('result').innerHTML = "";
+        }
+
+    </script>
+</body>
+</html>
